@@ -64,6 +64,8 @@ public class FinanceView extends VerticalLayout {
         setSizeFull();
         setPadding(true);
         setSpacing(true);
+        // Aksesibilitas: seluruh isi halaman berada di dalam landmark "main".
+        getElement().setAttribute("role", "main");
 
         H1 title = new H1("Cashflow");
 
@@ -103,7 +105,7 @@ public class FinanceView extends VerticalLayout {
                 .set("display", "block")
                 .set("font-size", "0.875rem")
                 .set("font-weight", "500")
-                .set("color", accent);
+                .set("color", valueColor);
 
         value.getStyle()
                 .set("display", "block")
@@ -197,6 +199,7 @@ public class FinanceView extends VerticalLayout {
         Button deleteButton = new Button("Hapus", VaadinIcon.TRASH.create(),
                 event -> openDeleteDialog(transaction));
         deleteButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_TERTIARY_INLINE);
+        deleteButton.getStyle().set("color", "#B91C1C");
         return new HorizontalLayout(deleteButton);
     }
 
@@ -223,10 +226,12 @@ public class FinanceView extends VerticalLayout {
         Button incomeButton = new Button("Tambah Pemasukan", VaadinIcon.PLUS.create(),
                 event -> openIncomeDialog());
         incomeButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
+        incomeButton.getStyle().set("background", "#166534").set("color", "#FFFFFF");
 
         Button expenseButton = new Button("Tambah Pengeluaran", VaadinIcon.MINUS.create(),
                 event -> openExpenseDialog());
         expenseButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_ERROR);
+        expenseButton.getStyle().set("background", "#991B1B").set("color", "#FFFFFF");
 
         Button searchButton = new Button("Cari", VaadinIcon.SEARCH.create(), event -> searchTransactions());
         Button refreshButton = new Button("Muat Ulang", VaadinIcon.REFRESH.create(), event -> refreshAll());
@@ -316,6 +321,7 @@ public class FinanceView extends VerticalLayout {
             dialog.close();
         });
         confirmButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_ERROR);
+        confirmButton.getStyle().set("background", "#991B1B").set("color", "#FFFFFF");
 
         Button cancelButton = new Button("Batal", VaadinIcon.CLOSE.create(), event -> dialog.close());
 
